@@ -1,7 +1,10 @@
 <template>
   <div class="blueprint">
     <h1>This is a form for blueprints</h1>
-    <OptionsForm :resource-options="this.$store.getters.stateBlueprintSchema" :resource-values="this.$store.getters.stateBlueprint" />
+    <OptionsForm 
+      :resource-options="$store.getters.stateBlueprintSchema" 
+      :resource-values="$store.getters.stateBlueprint"
+    />
   </div>
 </template>
 

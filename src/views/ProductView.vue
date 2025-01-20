@@ -1,7 +1,10 @@
 <template>
   <div class="product">
     <h1>This is a form for products</h1>
-    <OptionsForm :resource-options="this.$store.getters.stateProductSchema" :resource-values="this.$store.getters.stateProduct" />
+    <OptionsForm 
+      :resource-options="$store.getters.stateProductSchema" 
+      :resource-values="$store.getters.stateProduct"
+    />
   </div>
 </template>
 
