@@ -22,7 +22,7 @@ const actions = {
     commit('setProducts', data);
   },
   async viewProduct({commit}, id) {
-    let {data} = await axios.get(`product/${id}`);
+    let {data} = await axios.get(`products/${id}`);
     commit('setProduct', data);
   },
   async createProduct({dispatch}, product) {
@@ -31,11 +31,11 @@ const actions = {
   },
   // eslint-disable-next-line no-empty-pattern
   async updateProduct({}, product) {
-    await axios.patch(`product/${product.id}`, product.form);
+    await axios.patch(`products/${product.id}`, product.form);
   },
   // eslint-disable-next-line no-empty-pattern
   async deleteProduct({}, id) {
-    await axios.delete(`product/${id}`);
+    await axios.delete(`products/${id}`);
   }
 };
 

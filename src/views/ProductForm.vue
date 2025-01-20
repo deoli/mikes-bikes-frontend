@@ -11,12 +11,15 @@
 <script>
   import OptionsForm from '@/components/OptionsForm.vue';
   export default {
-    name: 'ProductView',
+    name: 'ProductForm',
     components: {
       OptionsForm
     },
     beforeCreate() {
       this.$store.getters.stateProductSchema || this.$store.dispatch('optionsProducts');
+      if (this.$route.params.id) {
+        this.$store.dispatch('viewProduct', this.$route.params.id);
+      }
     }
   };
 </script>

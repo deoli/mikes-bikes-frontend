@@ -11,12 +11,15 @@
 <script>
   import OptionsForm from '@/components/OptionsForm.vue';
   export default {
-    name: 'BlueprintView',
+    name: 'BlueprintForm',
     components: {
       OptionsForm
     },
     beforeCreate() {
       this.$store.getters.stateBlueprintSchema || this.$store.dispatch('optionsBlueprints');
+      if (this.$route.params.id) {
+        this.$store.dispatch('viewBlueprint', this.$route.params.id);
+      }
     }
   };
 </script>

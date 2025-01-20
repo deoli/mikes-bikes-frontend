@@ -22,7 +22,7 @@ const actions = {
     commit('setBlueprints', data);
   },
   async viewBlueprint({commit}, id) {
-    let {data} = await axios.get(`blueprint/${id}`);
+    let {data} = await axios.get(`blueprints/${id}`);
     commit('setBlueprint', data);
   },
   async createBlueprint({dispatch}, blueprint) {
@@ -31,11 +31,11 @@ const actions = {
   },
   // eslint-disable-next-line no-empty-pattern
   async updateBlueprint({}, blueprint) {
-    await axios.patch(`blueprint/${blueprint.id}`, blueprint.form);
+    await axios.patch(`blueprints/${blueprint.id}`, blueprint.form);
   },
   // eslint-disable-next-line no-empty-pattern
   async deleteBlueprint({}, id) {
-    await axios.delete(`blueprint/${id}`);
+    await axios.delete(`blueprints/${id}`);
   }
 };
 
