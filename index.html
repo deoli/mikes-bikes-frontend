@@ -1,21 +1,35 @@
-<script type="importmap">
-    {
-      "imports": {
-        "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
-      }
-    }
-  </script>
-  
-  <div id="app">{{ message }}</div>
-  
-  <script type="module">
-    import { createApp } from 'vue'
-  
-    createApp({
-      data() {
-        return {
-          message: 'Hello Vue!'
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Website</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <!-- <link rel="icon" href="favicon.ico" type="image/x-icon"> -->
+  </head>
+  <body>
+    <script type="importmap">
+      {
+        "imports": {
+          "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
         }
       }
-    }).mount('#app')
-  </script>
+    </script>
+    
+    <div id="app">{{ message }}</div>
+    
+    <script type="module">
+      import { createApp } from 'vue'
+    
+      createApp({
+        data() {
+          return {
+            message: 'Hello Vue!'
+          }
+        }
+      }).mount('#app')
+    </script>
+  </body>
+</html>
+
