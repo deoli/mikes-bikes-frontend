@@ -6,12 +6,12 @@
 </template>
 
 <script>
-import OptionsForm from '@/components/OptionsForm.vue'
+  import OptionsForm from '@/components/OptionsForm.vue'
 
-export default {
-  name: 'HomeView',
-  components: {
-    OptionsForm
+  export default {
+    name: 'HomeView',
+    components: {
+      OptionsForm
+    }
   }
-}
 </script>
