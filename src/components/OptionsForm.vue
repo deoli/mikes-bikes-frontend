@@ -1,33 +1,12 @@
 <template>
   <div>
-    <p>{{ msg }}</p>
+    <p>{{ resourceOptions }}</p>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-
-export default {
-  name: 'PingPong',
-  data() {
-    return {
-      msg: '',
-    };
-  },
-  props: ['resourceName'],
-  methods: {
-    getMessage() {
-      axios.options('/' + this.resourceName)
-        .then((res) => {
-          this.msg = res.data;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    },
-  },
-  created() {
-    this.getMessage();
-  },
-};
+  export default {
+    name: 'PingPong',
+    props: ['resourceOptions'],
+  };
 </script>

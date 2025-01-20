@@ -10,5 +10,5 @@
     props: {
       msg: String
     }
-  }
+  };
 </script>
