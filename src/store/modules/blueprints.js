@@ -42,6 +42,13 @@ const actions = {
 const mutations = {
   optionsBlueprints(state, options) {
     state.blueprintSchema = options;
+    if (!state.blueprint) {console.log(options);
+      let blueprint = {};
+      for (let option of options) {console.log(option);
+        blueprint[option.key] = null;
+      }
+      state.blueprint = blueprint;console.log(blueprint);
+    }
   },
   setBlueprints(state, blueprints) {
     state.blueprints = blueprints;

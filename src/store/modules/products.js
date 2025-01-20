@@ -42,6 +42,13 @@ const actions = {
 const mutations = {
   optionsProducts(state, options) {
     state.productSchema = options;
+    if (!state.product) {
+      let product = {};
+      for (let option of options) {
+        product[option.key] = null;
+      }
+      state.product = product;
+    }
   },
   setProducts(state, products) {
     state.products = products;
