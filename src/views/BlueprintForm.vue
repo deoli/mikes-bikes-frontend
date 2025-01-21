@@ -19,7 +19,7 @@
       this.$store.getters.stateBlueprintSchema || this.$store.dispatch('optionsBlueprints');
       if (this.$route.params.id) {
         this.$store.dispatch('viewBlueprint', this.$route.params.id);
-      } else {
+      } else if (this.$store.getters.stateBlueprint) {
         this.$store.dispatch('initBlueprint');
       }
     }

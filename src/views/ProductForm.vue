@@ -19,7 +19,7 @@
       this.$store.getters.stateProductSchema || this.$store.dispatch('optionsProducts');
       if (this.$route.params.id) {
         this.$store.dispatch('viewProduct', this.$route.params.id);
-      } else {
+      } else if (this.$store.getters.stateProduct) {
         this.$store.dispatch('initProduct');
       }
     }
