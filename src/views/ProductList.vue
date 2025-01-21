@@ -4,7 +4,7 @@
     <div class="row">
       <template v-for="product in $store.getters.stateProducts" :key="product.id">
         <div v-show="!product.parent_id" class="card col-sm m-3">
-          <img class="card-img-top" src="" alt="Card image cap">
+          <img class="card-img-top" src="../assets/logo.png" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">{{ product.name }}</h5>
             <p class="card-text">The item's description would go here if we had one.</p>
