@@ -36,7 +36,10 @@ const actions = {
   // eslint-disable-next-line no-empty-pattern
   async deleteProduct({}, id) {
     await axios.delete(`products/${id}`);
-  }
+  },
+  initProduct({commit}) {
+    commit('initProduct');
+  },
 };
 
 const mutations = {
@@ -54,6 +57,13 @@ const mutations = {
     state.products = products;
   },
   setProduct(state, product) {
+    state.product = product;
+  },
+  initProduct(state) {
+    let product = {};
+    for (let option of state.productSchema) {
+      product[option.key] = null;
+    }
     state.product = product;
   },
 };

@@ -36,7 +36,10 @@ const actions = {
   // eslint-disable-next-line no-empty-pattern
   async deleteBlueprint({}, id) {
     await axios.delete(`blueprints/${id}`);
-  }
+  },
+  initBlueprint({commit}) {
+    commit('initBlueprint');
+  },
 };
 
 const mutations = {
@@ -54,6 +57,13 @@ const mutations = {
     state.blueprints = blueprints;
   },
   setBlueprint(state, blueprint) {
+    state.blueprint = blueprint;
+  },
+  initBlueprint(state) {
+    let blueprint = {};
+    for (let option of state.blueprintSchema) {
+      blueprint[option.key] = null;
+    }
     state.blueprint = blueprint;
   },
 };

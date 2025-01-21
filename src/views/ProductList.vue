@@ -2,9 +2,10 @@
   <div class="product">
     <h1>These are the products</h1>
     <div class="list-group">
-      <a v-for="product in $store.getters.stateProducts" :key="product.id" :href="'/product/' + product.id" class="list-group-item list-group-item-action">
+      <router-link v-for="product in $store.getters.stateProducts" :key="product.id" :to="'/product/' + product.id" class="list-group-item list-group-item-action">
         {{ product.name }}
-      </a>
+      </router-link>
+      <router-link to="/product/new" class="list-group-item list-group-item-action list-group-item-primary">Add new product</router-link>
     </div>
   </div>
 </template>
