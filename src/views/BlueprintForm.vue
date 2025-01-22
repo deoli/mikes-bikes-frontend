@@ -7,16 +7,25 @@
       @save-form="saveForm"
       @cancel-form="cancelForm"
     />
-    <button class="btn btn-primary m-1" @click="addChild">Add child</button>
+    <div v-show="parentFilter">
+      <ItemsList
+        :resource-list="blueprintList"
+        :resource-type="'blueprint'"
+        :parent-filter="parentFilter"
+      />
+      <button class="btn btn-primary m-1" @click="addChild">Add child</button>
+    </div>
   </div>
 </template>
 
 <script>
   import OptionsForm from '@/components/OptionsForm.vue';
+  import ItemsList from '@/components/ItemsList.vue';
   export default {
     name: 'BlueprintForm',
     components: {
-      OptionsForm
+      OptionsForm,
+      ItemsList
     },
     computed: {
       blueprintOptions() {
@@ -30,6 +39,12 @@
         let template = this.$store.getters.stateBlueprintTemplate;
         template.parent_id = this.$route.params.parent_id || null;
         return template;
+      },
+      blueprintList() {
+        return this.$store.getters.stateBlueprints;
+      },
+      parentFilter() {
+        return this.$route.params.id || null;
       }
     },
     beforeCreate() {

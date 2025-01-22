@@ -4,7 +4,9 @@
     <ItemsList
       :resource-list="blueprintList"
       :resource-type="'blueprint'"
+      :parent-filter="null"
     />
+    <router-link to="/blueprint/new" class="btn btn-primary d-block">Add new blueprint</router-link>
   </div>
 </template>
 
