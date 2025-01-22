@@ -12,7 +12,8 @@
         </select>
       </div>
     </template>
-    <button class="btn btn-primary" type="submit">Save</button>
+    <button class="btn btn-primary m-1" type="submit">Save</button>
+    <button class="btn btn-secondary m-1" @click="cancelForm">Cancel</button>
   </form>
 </template>
 
@@ -35,7 +36,10 @@
         }
       },
       saveItem() {
-        this.$emit('sent-data', this.localModel);
+        this.$emit('save-form', this.localModel);
+      },
+      cancelForm() {
+        this.$emit('cancel-form');
       }
     }
   };

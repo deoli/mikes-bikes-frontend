@@ -4,7 +4,8 @@
     <OptionsForm 
       :resource-options="blueprintOptions" 
       :resource-values="blueprintValues"
-      @sent-data="saveForm"
+      @save-form="saveForm"
+      @cancel-form="cancelForm"
     />
   </div>
 </template>
@@ -30,6 +31,9 @@
     methods: {
       saveForm(data) {
         this.$store.dispatch('saveBlueprint', data);
+      },
+      cancelForm() {
+        this.$router.push({path: '/blueprints'});
       }
     }
   };
