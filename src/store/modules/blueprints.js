@@ -26,17 +26,18 @@ const actions = {
     let {data} = await axios.get(`blueprints/${id}`);
     commit('setBlueprint', data);
   },
-  async createBlueprint({dispatch}, blueprint) {
-    await axios.post('blueprints', blueprint);
-    await dispatch('getBlueprints');
+  async saveBlueprint({commit, dispatch}, blueprint) {
+    if (blueprint.id) {
+      await axios.patch(`blueprints/${blueprint.id}`, blueprint);
+      commit('setBlueprint', blueprint);
+    } else {
+      await axios.post('blueprints', blueprint);
+      await dispatch('getBlueprints');
+    }
   },
-  // eslint-disable-next-line no-empty-pattern
-  async updateBlueprint({}, blueprint) {
-    await axios.patch(`blueprints/${blueprint.id}`, blueprint.form);
-  },
-  // eslint-disable-next-line no-empty-pattern
-  async deleteBlueprint({}, id) {
+  async deleteBlueprint({dispatch}, id) {
     await axios.delete(`blueprints/${id}`);
+    await dispatch('getBlueprints');
   },
 };
 
@@ -58,7 +59,7 @@ const mutations = {
     }
   },
   setBlueprint(state, blueprint) {
-    state.blueprint = blueprint;
+    state.blueprints[blueprint.id] = blueprint;
   },
 };
 

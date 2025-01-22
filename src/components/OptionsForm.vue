@@ -35,7 +35,7 @@
         }
       },
       saveItem() {
-        console.log(this.localModel);
+        this.$emit('sent-data', this.localModel);
       }
     }
   };

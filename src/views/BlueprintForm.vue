@@ -4,6 +4,7 @@
     <OptionsForm 
       :resource-options="blueprintOptions" 
       :resource-values="blueprintValues"
+      @sent-data="saveForm"
     />
   </div>
 </template>
@@ -25,6 +26,11 @@
     },
     beforeCreate() {
       this.$store.getters.stateBlueprintSchema || this.$store.dispatch('optionsBlueprints');
+    },
+    methods: {
+      saveForm(data) {
+        this.$store.dispatch('saveBlueprint', data);
+      }
     }
   };
 </script>
