@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form v-on:submit.prevent="saveItem">
     <template v-for="resourceOption in resourceOptions" :key="resourceOption.key">
       <div :class="(resourceOption.type == 'boolean' ? 'form-check' : 'form-group') + ' m-3'">
         <label class="text-left">{{ resourceOption.key }}</label>
@@ -12,6 +12,7 @@
         </select>
       </div>
     </template>
+    <button class="btn btn-primary" type="submit">Save</button>
   </form>
 </template>
 
@@ -32,6 +33,9 @@
         if (resource == 'products') {
           return this.$store.getters.stateProducts || this.$store.dispatch('getProducts');
         }
+      },
+      saveItem() {
+        console.log(this.localModel);
       }
     }
   };

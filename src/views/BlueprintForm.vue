@@ -2,8 +2,8 @@
   <div class="blueprint">
     <h1>This is a form for blueprints</h1>
     <OptionsForm 
-      :resource-options="$store.getters.stateBlueprintSchema" 
-      :resource-values="$store.getters.stateBlueprint"
+      :resource-options="blueprintOptions" 
+      :resource-values="blueprintValues"
     />
   </div>
 </template>
@@ -15,13 +15,16 @@
     components: {
       OptionsForm
     },
+    computed: {
+      blueprintOptions() {
+        return this.$store.getters.stateBlueprintSchema;
+      },
+      blueprintValues() {
+        return this.$route.params.id ? this.$store.getters.stateBlueprint(this.$route.params.id) : this.$store.getters.stateBlueprintTemplate;
+      }
+    },
     beforeCreate() {
       this.$store.getters.stateBlueprintSchema || this.$store.dispatch('optionsBlueprints');
-      if (this.$route.params.id) {
-        this.$store.dispatch('viewBlueprint', this.$route.params.id);
-      } else if (this.$store.getters.stateBlueprint) {
-        this.$store.dispatch('initBlueprint');
-      }
     }
   };
 </script>
