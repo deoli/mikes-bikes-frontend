@@ -1,31 +1,27 @@
 <template>
   <div class="product">
     <h1>These are the products</h1>
-    <div class="row">
-      <template v-for="product in $store.getters.stateProducts" :key="product.id">
-        <div v-show="!product.parent_id" class="card col-sm m-3">
-          <img class="card-img-top" src="../assets/logo.png" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">{{ product.name }}</h5>
-            <p class="card-text">The item's description would go here if we had one.</p>
-            <router-link :to="'/product/' + product.id" class="btn btn-primary">
-              Modify
-            </router-link>
-          </div>
-        </div>
-      </template>
-      <router-link to="/product/new" class="btn btn-primary">Add new product</router-link>
-    </div>
+    <ItemsList
+      :resource-list="productList"
+      :resource-type="'product'"
+      :parent-filter="null"
+    />
+    <router-link to="/product/new" class="btn btn-primary d-block">Add new product</router-link>
   </div>
 </template>
 
 <script>
-  // import OptionsForm from '@/components/OptionsForm.vue';
+  import ItemsList from '@/components/ItemsList.vue';
   export default {
     name: 'ProductList',
-    // components: {
-    //   OptionsForm
-    // },
+    components: {
+      ItemsList
+    },
+    computed: {
+      productList() {
+        return this.$store.getters.stateProducts;
+      }
+    },
     beforeCreate() {
       this.$store.getters.stateProducts || this.$store.dispatch('getProducts');
     }

@@ -9,7 +9,8 @@ const state = {
 const getters = {
   stateProductSchema: state => state.productSchema,
   stateProducts: state => state.products,
-  stateProduct: state => state.product,
+  stateProduct: state => id => state.products[id],
+  stateProductTemplate: state => state.product,
 };
 
 const actions = {
@@ -25,20 +26,18 @@ const actions = {
     let {data} = await axios.get(`products/${id}`);
     commit('setProduct', data);
   },
-  async createProduct({dispatch}, product) {
-    await axios.post('products', product);
-    await dispatch('getProducts');
+  async saveProduct({commit, dispatch}, product) {
+    if (product.id) {
+      await axios.patch(`products/${product.id}`, product);
+      commit('setProduct', product);
+    } else {
+      await axios.post('products', product);
+      await dispatch('getProducts');
+    }
   },
-  // eslint-disable-next-line no-empty-pattern
-  async updateProduct({}, product) {
-    await axios.patch(`products/${product.id}`, product.form);
-  },
-  // eslint-disable-next-line no-empty-pattern
-  async deleteProduct({}, id) {
+  async deleteProduct({dispatch}, id) {
     await axios.delete(`products/${id}`);
-  },
-  initProduct({commit}) {
-    commit('initProduct');
+    await dispatch('getProducts');
   },
 };
 
@@ -54,17 +53,13 @@ const mutations = {
     }
   },
   setProducts(state, products) {
-    state.products = products;
+    state.products = {};
+    for (let product of products) {
+      state.products[product.id] = product;
+    }
   },
   setProduct(state, product) {
-    state.product = product;
-  },
-  initProduct(state) {
-    let product = {};
-    for (let option of state.productSchema) {
-      product[option.key] = null;
-    }
-    state.product = product;
+    state.products[product.id] = product;
   },
 };
 
