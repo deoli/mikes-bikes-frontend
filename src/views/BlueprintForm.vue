@@ -7,6 +7,7 @@
       @save-form="saveForm"
       @cancel-form="cancelForm"
     />
+    <button class="btn btn-primary m-1" @click="addChild">Add child</button>
   </div>
 </template>
 
@@ -22,7 +23,13 @@
         return this.$store.getters.stateBlueprintSchema;
       },
       blueprintValues() {
-        return this.$route.params.id ? this.$store.getters.stateBlueprint(this.$route.params.id) : this.$store.getters.stateBlueprintTemplate;
+        if (this.$route.params.id) {
+          return this.$store.getters.stateBlueprint(this.$route.params.id);
+        }
+
+        let template = this.$store.getters.stateBlueprintTemplate;
+        template.parent_id = this.$route.params.parent_id || null;
+        return template;
       }
     },
     beforeCreate() {
@@ -34,6 +41,9 @@
       },
       cancelForm() {
         this.$router.push({path: '/blueprints'});
+      },
+      addChild() {
+        this.$router.push({path: '/blueprint/' + this.$route.params.id + '/new'});
       }
     }
   };

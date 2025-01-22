@@ -7,7 +7,7 @@
         <input v-else-if="resourceOption.type == 'boolean'" type="checkbox" class="form-check-input" v-model="localModel[resourceOption.key]" />
         <textarea v-else-if="resourceOption.type == 'text'" class="form-control form-control-lg" v-model="localModel[resourceOption.key]">
         </textarea>
-        <select v-else-if="resourceOption.type.startsWith('ref')" class="form-control form-control-lg" v-model="localModel[resourceOption.key]">
+        <select v-else-if="resourceOption.type.startsWith('ref')" class="form-control form-control-lg" disabled v-model="localModel[resourceOption.key]">
           <option v-for="item in getList(resourceOption.type.slice(4))" :key="item.id" :value="item.id">{{ item.name }}</option>
         </select>
       </div>
