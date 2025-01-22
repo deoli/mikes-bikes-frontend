@@ -38,9 +38,6 @@ const actions = {
   async deleteBlueprint({}, id) {
     await axios.delete(`blueprints/${id}`);
   },
-  initBlueprint({commit}) {
-    commit('initBlueprint');
-  },
 };
 
 const mutations = {
@@ -61,13 +58,6 @@ const mutations = {
     }
   },
   setBlueprint(state, blueprint) {
-    state.blueprint = blueprint;
-  },
-  initBlueprint(state) {
-    let blueprint = {};
-    for (let option of state.blueprintSchema) {
-      blueprint[option.key] = null;
-    }
     state.blueprint = blueprint;
   },
 };

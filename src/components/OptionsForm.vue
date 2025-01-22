@@ -22,7 +22,7 @@
     props: ['resourceOptions', 'resourceValues'],
     computed: {
       localModel() {
-        return this.resourceValues;
+        return Object.assign({}, this.resourceValues);
       },
     },
     methods: {
