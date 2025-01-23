@@ -55,7 +55,11 @@
         this.$store.dispatch('saveBlueprint', data);
       },
       cancelForm() {
-        this.$router.push({path: '/blueprints'});
+        if (this.blueprintValues.parent_id) {
+          this.$router.push({path: '/blueprint/' + this.blueprintValues.parent_id});
+        } else {
+          this.$router.push({path: '/blueprints'});
+        }
       },
       addChild() {
         this.$router.push({path: '/blueprint/' + this.$route.params.id + '/new'});

@@ -30,7 +30,7 @@
       </template>
     </template>
     <button class="btn btn-primary m-1" type="submit">Save</button>
-    <button class="btn btn-secondary m-1" @click="cancelForm">Cancel</button>
+    <button class="btn btn-secondary m-1" @click.prevent="cancelForm">Cancel</button>
   </form>
 </template>
 
