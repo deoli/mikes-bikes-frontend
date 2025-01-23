@@ -5,7 +5,7 @@
       <a @click.prevent="deleteProduct(product)" class="item-pill-delete">X</a>
     </span>
   </template>
-  <router-link :to="'/blueprint/' + blueprintId + '/product/new'" class="badge bg-primary m-1">
+  <router-link :to="'/blueprint/' + blueprintId + '/product/' + this.$route.params.id + '/new'" class="badge bg-primary m-1">
     Add Product
   </router-link>
 </template>
@@ -16,18 +16,18 @@
     props: ['blueprintId'],
     computed: {
       relatedProducts() {
-        return this.getRelatedProducts(this.blueprintId);
+        return this.getRelatedProducts(this.$route.params.id, this.blueprintId);
       },
     },
     beforeCreate() {
       this.$store.getters.stateProducts || this.$store.dispatch('getProducts');
     },
     methods: {
-      getRelatedProducts(id) {
+      getRelatedProducts(parent_id, blueprint_id) {
         let products = [];
         // eslint-disable-next-line no-empty-pattern
         for (let [{}, product] of Object.entries(this.$store.getters.stateProducts)) {
-          if (product.blueprint_id == id) {
+          if (product.parent_id == parent_id && product.blueprint_id == blueprint_id) {
             products.push(product);
           }
         }

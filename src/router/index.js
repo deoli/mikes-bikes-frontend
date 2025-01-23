@@ -29,6 +29,10 @@ const routes = [
     component: () => import('@/views/ProductForm.vue')
   },
   {
+    path: '/blueprint/:blueprint_id/product/:parent_id/new',
+    component: () => import('@/views/ProductForm.vue')
+  },
+  {
     path: '/products',
     name: 'products',
     component: () => import('@/views/ProductList.vue')
