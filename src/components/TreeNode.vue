@@ -9,6 +9,7 @@
   <div v-else class="list-group-item" :style="'padding-left:' + (1 + (level * 2)) + 'rem'">
     <span style="top: -.5rem; position: relative;">|__</span>
     {{ node.name }}
+    <ItemPills :blueprint-id="node.id" />
   </div>
   <template v-for="child in node.children" :key="child.id">
     <TreeNode :node="child" :level="level + 1" :editor="editor" />
@@ -17,10 +18,12 @@
 
 <script>
   import TreeNode from '@/components/TreeNode.vue';
+  import ItemPills from '@/components/ItemPills.vue';
   export default {
     name: 'TreeNode',
     components: {
-      TreeNode
+      TreeNode,
+      ItemPills,
     },
     props: ['node', 'level', 'editor'],
   }
