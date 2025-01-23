@@ -14,6 +14,9 @@
           </button>
         </div>
         <template v-if="resourceType === 'blueprint'">
+          <router-link :to="'/' + resourceType + '/tree/' + item.id" class="btn btn-secondary m-1">
+            Tree
+          </router-link>
           <ul class="list-group list-group-flush">
             <template v-for="product in productList" :key="product.id">
               <router-link v-if="product.blueprint_id == item.id" :to="'/product/' + product.id" class="list-group-item list-group-item-action">
