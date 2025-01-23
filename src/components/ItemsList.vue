@@ -6,9 +6,12 @@
         <div class="card-body">
           <h5 class="card-title">{{ item.name }}</h5>
           <p class="card-text" style="font-size: .9rem;">The item's description would go here if we had one.</p>
-          <router-link :to="'/' + resourceType + '/' + item.id" class="btn btn-primary">
+          <router-link :to="'/' + resourceType + '/' + item.id" class="btn btn-primary m-1">
             Modify
           </router-link>
+          <button @click.prevent="deleteItem(item)" class="btn btn-danger m-1">
+            X
+          </button>
         </div>
       </div>
     </template>
@@ -18,6 +21,20 @@
 <script>
   export default {
     name: 'ItemsList',
-    props: ['resourceList', 'resourceType', 'parentFilter']
+    props: ['resourceList', 'resourceType', 'parentFilter'],
+    methods: {
+      deleteItem(item) {
+        if (this.resourceType === 'blueprint') {
+          if (confirm('Are you sure you want to delete this Blueprint?')) {
+            this.$store.dispatch('deleteBlueprint', item.id);
+          }
+        }
+        if (this.resourceType === 'product') {
+          if (confirm('Are you sure you want to delete this Product?')) {
+            this.$store.dispatch('deleteProduct', item.id);
+          }
+        }
+      }
+    }
   };
 </script>

@@ -45,10 +45,10 @@
     },
     methods: {
       getList(resource) {
-        if (resource == 'blueprints') {
+        if (resource === 'blueprints') {
           return this.$store.getters.stateBlueprints || this.$store.dispatch('getBlueprints');
         }
-        if (resource == 'products') {
+        if (resource === 'products') {
           return this.$store.getters.stateProducts || this.$store.dispatch('getProducts');
         }
       },
