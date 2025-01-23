@@ -7,25 +7,23 @@
       @save-form="saveForm"
       @cancel-form="cancelForm"
     />
-    <div v-show="parentFilter">
-      <ItemsList
-        :resource-list="blueprintList"
-        :resource-type="'blueprint'"
-        :parent-filter="parentFilter"
-      />
-      <button class="btn btn-primary m-1" @click="addChild">Add child</button>
+    <div v-show="parentFilter" class="card">
+      <ul class="list-group list-group-flush">
+        <TreeView />
+        <button class="list-group-item list-group-item-action active" @click="addChild">Add child</button>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
   import OptionsForm from '@/components/OptionsForm.vue';
-  import ItemsList from '@/components/ItemsList.vue';
+  import TreeView from '@/views/TreeView.vue';
   export default {
     name: 'BlueprintForm',
     components: {
       OptionsForm,
-      ItemsList
+      TreeView
     },
     computed: {
       blueprintOptions() {
