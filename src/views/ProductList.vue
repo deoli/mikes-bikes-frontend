@@ -1,21 +1,20 @@
 <template>
   <div class="product">
     <h1>These are the products</h1>
-    <ItemsList
+    <ProductsList
       :resource-list="productList"
       :resource-type="'product'"
       :parent-filter="null"
     />
-    <router-link to="/product/new" class="btn btn-primary d-block">Add new product</router-link>
   </div>
 </template>
 
 <script>
-  import ItemsList from '@/components/ItemsList.vue';
+  import ProductsList from '@/components/ProductsList.vue';
   export default {
     name: 'ProductList',
     components: {
-      ItemsList
+      ProductsList
     },
     computed: {
       productList() {
