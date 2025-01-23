@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="row items-list-vue">
     <template v-for="item in resourceList" :key="item.id">
       <div v-show="item.parent_id == parentFilter" class="card col-sm m-3" style="max-width: 12rem;">
         <img class="card-img-top" src="../assets/logo.png" alt="Card image cap">
@@ -13,6 +13,16 @@
             X
           </button>
         </div>
+        <template v-if="resourceType === 'blueprint'">
+          <ul class="list-group list-group-flush">
+            <template v-for="product in productList" :key="product.id">
+              <li v-if="product.blueprint_id == item.id" class="list-group-item">{{ product.name }}</li>
+            </template>
+            <router-link :to="'/' + resourceType + '/' + item.id + '/product/new'" class="list-group-item list-group-item-action active">
+              Add product
+            </router-link>
+          </ul>
+        </template>
       </div>
     </template>
   </div>
@@ -22,6 +32,11 @@
   export default {
     name: 'ItemsList',
     props: ['resourceList', 'resourceType', 'parentFilter'],
+    computed: {
+      productList() {
+        return this.$store.getters.stateProducts || this.$store.dispatch('getProducts');
+      }
+    },
     methods: {
       deleteItem(item) {
         if (this.resourceType === 'blueprint') {
@@ -38,3 +53,14 @@
     }
   };
 </script>
+
+<style>
+  .items-list-vue .list-group-flush {
+    margin-left: calc(var(--bs-gutter-x) * -0.5);
+    margin-right: calc(var(--bs-gutter-x) * -0.5);
+  }
+  .items-list-vue .list-group-item {
+    padding-left: calc(var(--bs-list-group-item-padding-x) + var(--bs-gutter-x) * 0.5);
+    padding-right: calc(var(--bs-list-group-item-padding-x) + var(--bs-gutter-x) * 0.5);
+  }
+</style>

@@ -21,7 +21,7 @@
         </div>
       </template>
       <template v-else-if="resourceOption.type.startsWith('ref')">
-        <div class="form-group m-3" v-show="localModel['parent_id']">
+        <div class="form-group m-3" v-show="localModel['parent_id'] || resourceOption.key !== 'parent_id'">
           <label class="text-left">{{ resourceOption.key }}</label>
           <select class="form-control form-control-lg" disabled v-model="localModel[resourceOption.key]">
             <option v-for="item in getList(resourceOption.type.slice(4))" :key="item.id" :value="item.id">{{ item.name }}</option>

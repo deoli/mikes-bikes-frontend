@@ -1,6 +1,6 @@
 <template>
   <div class="blueprint">
-    <h1>These are the blueprints</h1>
+    <h1>These are your blueprints</h1>
     <ItemsList
       :resource-list="blueprintList"
       :resource-type="'blueprint'"

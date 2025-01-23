@@ -38,6 +38,7 @@
 
         let template = this.$store.getters.stateProductTemplate;
         template.parent_id = this.$route.params.parent_id || null;
+        template.blueprint_id = this.$route.params.blueprint_id || null;
         return template;
       },
       productList() {
