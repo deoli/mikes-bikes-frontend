@@ -6,16 +6,13 @@
   import TreeNode from '@/components/TreeNode.vue';
   export default {
     name: 'TreeView',
+    props: ['rootId'],
     components: {
       TreeNode,
     },
     computed: {
       getNode() {
-        let rootNode = {};
-        if (this.$route.params.id) {
-          rootNode = this.getNodeWithChildren(this.$route.params.id);
-        }
-        return rootNode;
+        return this.getNodeWithChildren(this.rootId);
       },
     },
     beforeCreate() {
