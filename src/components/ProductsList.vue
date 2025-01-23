@@ -17,7 +17,7 @@
 
 <script>
   export default {
-    name: 'ItemsList',
+    name: 'ProductsList',
     props: ['resourceList', 'resourceType', 'parentFilter'],
   };
 </script>

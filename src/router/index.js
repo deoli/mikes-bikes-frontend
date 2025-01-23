@@ -38,12 +38,8 @@ const routes = [
     component: () => import('@/views/ProductList.vue')
   },
   {
-    path: '/product/new',
-    component: () => import('@/views/ProductForm.vue')
-  },
-  {
     path: '/product/:id',
-    component: () => import('@/views/ProductForm.vue')
+    component: () => import('@/views/ProductConfig.vue')
   },
 ];
 

@@ -1,6 +1,6 @@
 <template>
   <div class="product">
-    <h1>These are the products</h1>
+    <h1>These are our products</h1>
     <ProductsList
       :resource-list="productList"
       :resource-type="'product'"
