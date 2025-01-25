@@ -12,7 +12,13 @@
   export default {
     components: {
       NavBar
-    }
+    },
+    beforeCreate() {
+      this.$store.dispatch('getBlueprints');
+      this.$store.dispatch('getProducts');
+      this.$store.dispatch('optionsBlueprints');
+      this.$store.dispatch('optionsProducts');
+    },
   };
 </script>
 

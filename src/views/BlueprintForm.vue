@@ -45,9 +45,6 @@
         return this.$route.params.id || null;
       }
     },
-    beforeCreate() {
-      this.$store.getters.stateBlueprintSchema || this.$store.dispatch('optionsBlueprints');
-    },
     methods: {
       saveForm(data) {
         this.$store.dispatch('saveBlueprint', data);

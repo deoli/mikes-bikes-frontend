@@ -19,9 +19,6 @@
         return this.getRelatedProducts(this.$route.params.id, this.blueprintId);
       },
     },
-    beforeCreate() {
-      this.$store.getters.stateProducts || this.$store.dispatch('getProducts');
-    },
     methods: {
       getRelatedProducts(parent_id, blueprint_id) {
         let products = [];

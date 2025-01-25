@@ -45,9 +45,6 @@
         return this.$route.params.id || null;
       }
     },
-    beforeCreate() {
-      this.$store.getters.stateProductSchema || this.$store.dispatch('optionsProducts');
-    },
     methods: {
       saveForm(data) {
         this.$store.dispatch('saveProduct', data);

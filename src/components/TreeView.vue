@@ -15,9 +15,6 @@
         return this.getNodeWithChildren(this.rootId);
       },
     },
-    beforeCreate() {
-      this.$store.getters.stateBlueprints || this.$store.dispatch('getBlueprints');
-    },
     methods: {
       getNodeWithChildren(id) {
         let parentNode = this.$store.getters.stateBlueprint(id);

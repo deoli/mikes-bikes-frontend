@@ -22,8 +22,5 @@
         return this.$store.getters.stateBlueprints;
       }
     },
-    beforeCreate() {
-      this.$store.getters.stateBlueprints || this.$store.dispatch('getBlueprints');
-    }
   };
 </script>

@@ -21,8 +21,5 @@
         return this.$store.getters.stateProducts;
       }
     },
-    beforeCreate() {
-      this.$store.getters.stateProducts || this.$store.dispatch('getProducts');
-    }
   };
 </script>

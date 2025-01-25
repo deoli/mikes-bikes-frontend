@@ -20,9 +20,5 @@
         return product.blueprint_id;
       }
     },
-    beforeCreate() {
-      this.$store.getters.stateBlueprints || this.$store.dispatch('getBlueprints');
-      this.$store.getters.stateProducts || this.$store.dispatch('getProducts');
-    }
   };
 </script>
