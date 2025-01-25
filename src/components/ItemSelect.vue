@@ -2,7 +2,7 @@
   <select :name="'select-' + blueprint.id" :required="blueprint.is_optional ? false : true" class="form-control">
     <option value="">Please select</option>
     <template v-for="product in relatedProducts" :key="product.id">
-      <option value="{{ product.id }}">
+      <option :value="product.id">
         {{ product.name }}
       </option>
     </template>    

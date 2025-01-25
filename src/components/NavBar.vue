@@ -15,6 +15,12 @@
               <router-link class="nav-link" to="/products">Shop</router-link>
             </li>
           </ul>
+
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+              <router-link :class="cartCount ? 'btn btn-warning' : 'nav-link'" to="/cart">Cart <span class="badge badge-light">{{ cartCount }}</span></router-link>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
@@ -25,7 +31,12 @@
   import { defineComponent } from 'vue';
   
   export default defineComponent({
-    name: 'NavBar'
+    name: 'NavBar',
+    computed: {
+      cartCount: function() {
+        return this.$store.getters.stateCart.length;
+      }
+    },
   });
 </script>
   
