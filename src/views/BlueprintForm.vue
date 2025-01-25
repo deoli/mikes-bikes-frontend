@@ -9,7 +9,7 @@
     />
     <div v-show="parentFilter" class="card">
       <ul class="list-group list-group-flush">
-        <TreeEdit :root-id="$route.params.id" />
+        <TreeView :root-id="$route.params.id" :nodeAction="'editor'" />
         <button class="list-group-item list-group-item-action active" @click="addChild">Add child</button>
       </ul>
     </div>
@@ -18,12 +18,12 @@
 
 <script>
   import OptionsForm from '@/components/OptionsForm.vue';
-  import TreeEdit from '@/components/TreeEdit.vue';
+  import TreeView from '@/components/TreeView.vue';
   export default {
     name: 'BlueprintForm',
     components: {
       OptionsForm,
-      TreeEdit
+      TreeView
     },
     computed: {
       blueprintOptions() {

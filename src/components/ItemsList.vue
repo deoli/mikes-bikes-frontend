@@ -16,7 +16,7 @@
         <template v-if="resourceType === 'blueprint'">
           <ul class="list-group list-group-flush">
             <template v-for="product in productList" :key="product.id">
-              <router-link v-if="product.blueprint_id == item.id" :to="'/product/' + product.id" class="list-group-item list-group-item-action">
+              <router-link v-if="product.blueprint_id == item.id" :to="'/blueprint/' + item.id + '/product/' + product.id" class="list-group-item list-group-item-action">
                   {{ product.name }}
               </router-link>
             </template>

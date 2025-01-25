@@ -1,12 +1,12 @@
 <template>
-  <TreeNode :node="getNode" :level="0" :editor="false" />
+  <TreeNode :node="getNode" :level="0" :action="nodeAction" />
 </template>
 
 <script>
   import TreeNode from '@/components/TreeNode.vue';
   export default {
     name: 'TreeView',
-    props: ['rootId'],
+    props: ['rootId', 'nodeAction'],
     components: {
       TreeNode,
     },

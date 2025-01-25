@@ -1,7 +1,9 @@
 <template>
-  <ul class="list-group list-group-flush">
-    <TreeView :root-id="getBlueprintId" />
-  </ul>
+  <form>
+    <ul class="list-group list-group-flush">
+        <TreeView :root-id="getBlueprintId" :nodeAction="'configurator'" />
+    </ul>
+  </form>
 </template>
 
 <script>
