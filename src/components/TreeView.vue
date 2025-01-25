@@ -17,6 +17,10 @@
     },
     methods: {
       getNodeWithChildren(id) {
+        if (id === undefined) {
+          return {};
+        }
+
         let parentNode = this.$store.getters.stateBlueprint(id);
         parentNode.children = [];
         for (let [child_id, blueprint] of Object.entries(this.$store.getters.stateBlueprints)) {
