@@ -30,6 +30,7 @@
     color: #2c3e50;
   }
   .main {
-    padding-top: 5em;
+    padding-top: 3em;
+    padding-bottom: 3em;
   }
 </style>

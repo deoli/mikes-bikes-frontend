@@ -1,16 +1,22 @@
 <template>
   <div class="product">
-    <h1>This is a form for products</h1>
-    <OptionsForm 
-      :resource-options="productOptions" 
-      :resource-values="productValues"
-      @save-form="saveForm"
-      @cancel-form="cancelForm"
-    />
-    <div v-show="parentFilter" class="card">
-      <ul class="list-group list-group-flush">
-        <TreeView :root-id="productValues.blueprint_id" />
-      </ul>
+    <div class="row">
+      <div class="col">
+        <h1>Product form</h1>
+        <OptionsForm 
+          :resource-options="productOptions" 
+          :resource-values="productValues"
+          @save-form="saveForm"
+          @cancel-form="cancelForm"
+        />
+      </div>
+      <div class="col">
+        <div v-show="parentFilter" class="card">
+          <ul class="list-group list-group-flush">
+            <TreeView :root-id="productValues.blueprint_id" />
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </template>

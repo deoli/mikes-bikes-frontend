@@ -1,17 +1,23 @@
 <template>
   <div class="blueprint">
-    <h1>This is a form for blueprints</h1>
-    <OptionsForm 
-      :resource-options="blueprintOptions" 
-      :resource-values="blueprintValues"
-      @save-form="saveForm"
-      @cancel-form="cancelForm"
-    />
-    <div v-show="parentFilter" class="card">
-      <ul class="list-group list-group-flush">
-        <TreeView :root-id="$route.params.id" :nodeAction="'editor'" />
-        <button class="list-group-item list-group-item-action active" @click="addChild">Add child</button>
-      </ul>
+    <div class="row">
+      <div class="col">
+        <h1>Product blueprint form</h1>
+        <OptionsForm 
+          :resource-options="blueprintOptions" 
+          :resource-values="blueprintValues"
+          @save-form="saveForm"
+          @cancel-form="cancelForm"
+        />        
+      </div>
+      <div class="col">
+        <div v-show="parentFilter" class="card">
+          <ul class="list-group list-group-flush">
+            <TreeView :root-id="$route.params.id" :nodeAction="'editor'" />
+            <button class="list-group-item list-group-item-action active" @click="addChild">Add child</button>
+          </ul>
+        </div>        
+      </div>
     </div>
   </div>
 </template>

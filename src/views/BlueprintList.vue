@@ -1,12 +1,12 @@
 <template>
   <div class="blueprint">
-    <h1>These are your blueprints</h1>
+    <h1>Product blueprints</h1>
     <ItemsList
       :resource-list="blueprintList"
       :resource-type="'blueprint'"
       :parent-filter="null"
     />
-    <router-link to="/blueprint/new" class="btn btn-primary d-block">Add new blueprint</router-link>
+    <router-link to="/blueprint/new" class="btn btn-primary d-block">New blueprint</router-link>
   </div>
 </template>
 

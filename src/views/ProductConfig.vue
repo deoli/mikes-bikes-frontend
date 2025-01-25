@@ -1,9 +1,11 @@
 <template>
   <form v-on:submit.prevent="addToCart">
-    <ul class="list-group list-group-flush">
-        <TreeView :root-id="getBlueprintId" :nodeAction="'configurator'" />
-    </ul>
-    <button class="btn btn-primary m-1" type="submit">Add to cart</button>  
+    <div class="card">
+      <ul class="list-group list-group-flush">
+          <TreeView :root-id="getBlueprintId" :nodeAction="'configurator'" />
+      </ul>
+      <button class="btn btn-primary m-1" type="submit">Add to cart</button>  
+    </div>
   </form>
 </template>
 
