@@ -16,7 +16,7 @@
     props: ['blueprintId'],
     computed: {
       relatedProducts() {
-        return this.getRelatedProducts(this.$route.params.id, this.blueprintId);
+        return this.getRelatedProducts(parseInt(this.$route.params.id), this.blueprintId);
       },
     },
     methods: {
@@ -24,7 +24,7 @@
         let products = [];
         // eslint-disable-next-line no-empty-pattern
         for (let [{}, product] of Object.entries(this.$store.getters.stateProducts)) {
-          if (product.parent_id == parent_id && product.blueprint_id == blueprint_id) {
+          if (product.parent_id.includes(parent_id) && product.blueprint_id == blueprint_id) {
             products.push(product);
           }
         }

@@ -33,30 +33,19 @@
     computed: {
       productValues() {
         if (this.$route.params.id) {
-          let product = this.$store.getters.stateProduct(this.$route.params.id);
-          product.parent_id = [];
-          product.blueprint_id = null;
-          for (let relation of this.$store.getters.stateProductRelations) {
-            if (relation.product_id == product.id) {
-              if (relation.parent_id) {
-                product.parent_id.push(relation.parent_id);
-              }
-              product.blueprint_id = relation.blueprint_id;
-            }
-          }
-          return product;
+          return this.$store.getters.stateProduct(this.$route.params.id);
         }
 
         let template = this.$store.getters.stateProductTemplate;
-        template.parent_id = this.$route.params.parent_id? [this.$route.params.parent_id] : [];
-        template.blueprint_id = this.$route.params.blueprint_id || null;
+        template.parent_id = this.$route.params.parent_id ? [parseInt(this.$route.params.parent_id)] : [];
+        template.blueprint_id = parseInt(this.$route.params.blueprint_id) || null;
         return template;
       },
       productList() {
         return this.$store.getters.stateProducts;
       },
       parentFilter() {
-        return this.$route.params.id || null;
+        return parseInt(this.$route.params.id) || null;
       }
     },
     methods: {

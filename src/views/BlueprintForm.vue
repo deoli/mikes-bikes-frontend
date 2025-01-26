@@ -38,14 +38,14 @@
         }
 
         let template = this.$store.getters.stateBlueprintTemplate;
-        template.parent_id = this.$route.params.parent_id || null;
+        template.parent_id = parseInt(this.$route.params.parent_id) || null;
         return template;
       },
       blueprintList() {
         return this.$store.getters.stateBlueprints;
       },
       parentFilter() {
-        return this.$route.params.id || null;
+        return parseInt(this.$route.params.id) || null;
       }
     },
     methods: {

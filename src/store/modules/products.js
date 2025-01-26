@@ -80,7 +80,24 @@ const mutations = {
   },
   setProductRelations(state, relations) {
     state.productRelations = relations;
-
+    if (!state.products) {
+      return;
+    }
+    
+    // eslint-disable-next-line no-empty-pattern
+    for (let [{}, product] of Object.entries(state.products)) {
+      product.parent_id = [];
+      product.blueprint_id = null;
+      for (let relation of relations) {
+        if (relation.product_id == product.id) {
+          if (relation.parent_id) {
+            product.parent_id.push(relation.parent_id);
+          }
+          product.blueprint_id = relation.blueprint_id;
+        }
+      }
+      state.products[product.id] = product;
+    }
   },
   setProduct(state, product) {
     state.products[product.id] = product;

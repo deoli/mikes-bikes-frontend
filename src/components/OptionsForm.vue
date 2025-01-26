@@ -98,7 +98,7 @@
         return {};
       },
       getProductParentList() {
-        let blueprintId = this.$route.params.blueprint_id || null;
+        let blueprintId = parseInt(this.$route.params.blueprint_id) || null;
         let blueprint = this.$store.getters.stateBlueprint(blueprintId);
         let products = [];
         // eslint-disable-next-line no-empty-pattern
@@ -108,7 +108,7 @@
           }
         }
         // if (products.length === 0) {
-        //   let parent_id = this.$route.params.parent_id || null;
+        //   let parent_id = parseInt(this.$route.params.parent_id) || null;
         //   products.push(this.$store.getters.stateProduct(parent_id));
         // }
         return products;
