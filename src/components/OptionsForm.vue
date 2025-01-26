@@ -4,7 +4,12 @@
       <template v-if="resourceOption.type === 'string'">
         <div class="form-group mb-3">
           <label class="text-left">{{ resourceOption.key }}</label>
-          <input ref="inputs" type="text" required class="form-control form-control-lg" v-model="localModel[resourceOption.key]" />
+          <template v-if="resourceOption.key === 'name'">
+            <v-select label="name" :options="resourceList" taggable :value="localModel[resourceOption.key]" @input="setName"></v-select>
+          </template>
+          <template v-else>
+            <input ref="inputs" type="text" required class="form-control form-control-lg" v-model="localModel[resourceOption.key]" />
+          </template>
         </div>
       </template>
       <template v-else-if="resourceOption.type === 'text'">
@@ -54,13 +59,29 @@
     props: ['resourceType', 'resourceValues'],
     computed: {
       resourceOptions() {
-        if (this.resourceType === 'blueprint') {
+        if (this.resourceType === 'blueprints') {
           return this.$store.getters.stateBlueprintSchema;
         }
-        if (this.resourceType === 'product') {
+        if (this.resourceType === 'products') {
           return this.$store.getters.stateProductSchema;
         }
         return null;
+      },
+      resourceList() {
+        let list = [];
+        if (this.resourceType === 'blueprints') {
+        // eslint-disable-next-line no-empty-pattern
+        for (let [{}, blueprint] of Object.entries(this.$store.getters.stateBlueprints)) {
+            list.push(blueprint);
+          }
+        }
+        if (this.resourceType === 'products') {
+        // eslint-disable-next-line no-empty-pattern
+        for (let [{}, product] of Object.entries(this.$store.getters.stateProducts)) {
+            list.push(product);
+          }
+        }
+        return list;
       },
       localModel() {
         return Object.assign({}, this.resourceValues);
@@ -74,6 +95,7 @@
         if (resource === 'products') {
           return this.$store.getters.stateProducts;
         }
+        return {};
       },
       getProductParentList() {
         let blueprintId = this.$route.params.blueprint_id || null;
@@ -90,6 +112,9 @@
         //   products.push(this.$store.getters.stateProduct(parent_id));
         // }
         return products;
+      },
+      setName(event) {
+          this.localModel['name'] = event.target.value;
       },
       saveItem() {
         this.$emit('save-form', this.localModel);

@@ -4,7 +4,7 @@
       <div class="col">
         <h1>Product blueprint form</h1>
         <OptionsForm 
-          :resource-type="'blueprint'" 
+          :resource-type="'blueprints'" 
           :resource-values="blueprintValues"
           @save-form="saveForm"
           @cancel-form="cancelForm"

@@ -4,7 +4,7 @@
       <div class="col">
         <h1>Product form</h1>
         <OptionsForm 
-          :resource-type="'product'" 
+          :resource-type="'products'" 
           :resource-values="productValues"
           @save-form="saveForm"
           @cancel-form="cancelForm"
