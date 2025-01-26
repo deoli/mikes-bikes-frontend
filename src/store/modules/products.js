@@ -75,7 +75,7 @@ const mutations = {
   setProducts(state, products) {
     state.products = {};
     for (let product of products) {
-      state.products[product.id] = product;
+      mutations.setProduct(state, product);
     }
   },
   setProductRelations(state, relations) {
@@ -98,8 +98,32 @@ const mutations = {
       }
       state.products[product.id] = product;
     }
+    
+    // eslint-disable-next-line no-empty-pattern
+    for (let [{}, product] of Object.entries(state.products)) {
+      product.ancestor_id = getAncestorIds(product.id);
+      state.products[product.id] = product;
+    }
+    
+    function getAncestorIds(productId) {
+      let parent = state.products[productId];
+      let ancestorIds = parent.parent_id;
+      for (let ancestorId of ancestorIds) {
+        ancestorIds = ancestorIds.concat(getAncestorIds(ancestorId));
+      }
+      return ancestorIds;
+    }
   },
   setProduct(state, product) {
+    if (!product.ancestor_id) {
+      product.ancestor_id = [];
+    }
+    if (!product.parent_id) {
+      product.parent_id = [];
+    }
+    if (!product.blueprint_id) {
+      product.blueprint_id = null;
+    }
     state.products[product.id] = product;
   },
 };
