@@ -10,7 +10,7 @@ const getters = {
   stateBlueprintSchema: state => state.blueprintSchema,
   stateBlueprints: state => state.blueprints,
   stateBlueprint: state => id => state.blueprints[id],
-  stateBlueprintTemplate: state => state.blueprint,
+  stateBlueprintTemplate: state => state.blueprintTemplate,
 };
 
 const actions = {
@@ -44,12 +44,12 @@ const actions = {
 const mutations = {
   optionsBlueprints(state, options) {
     state.blueprintSchema = options;
-    if (!state.blueprint) {
+    if (!state.blueprintTemplate) {
       let blueprint = {};
       for (let option of options) {
         blueprint[option.key] = null;
       }
-      state.blueprint = blueprint;
+      state.blueprintTemplate = blueprint;
     }
   },
   setBlueprints(state, blueprints) {

@@ -10,7 +10,8 @@ const getters = {
   stateProductSchema: state => state.productSchema,
   stateProducts: state => state.products,
   stateProduct: state => id => state.products[id],
-  stateProductTemplate: state => state.product,
+  stateProductTemplate: state => state.productTemplate,
+  stateProductRelations: state => state.productRelations,
 };
 
 const actions = {
@@ -22,6 +23,10 @@ const actions = {
     let {data} = await axios.get('products');
     commit('setProducts', data);
   },
+  async getProductRelations({commit}) {
+    let {data} = await axios.get('blueprint_products');
+    commit('setProductRelations', data);
+  },
   async viewProduct({commit}, id) {
     let {data} = await axios.get(`products/${id}`);
     commit('setProduct', data);
@@ -31,9 +36,22 @@ const actions = {
       await axios.patch(`products/${product.id}`, product);
       commit('setProduct', product);
     } else {
-      await axios.post('products', product);
+      let {data} = await axios.post('products', product);
+      product.id = data.id;
       await dispatch('getProducts');
     }
+    if (product.blueprint_id) {
+      let relation = {'blueprint_id': product.blueprint_id, 'product_id': product.id};
+      if (product.parent_ids && product.parent_ids.length) {
+        for (let parent_id in product.parent_ids) {
+          relation.parent_id = parent_id;
+          await axios.post('blueprint_products', relation);
+        }
+      } else {
+        await axios.post('blueprint_products', relation);
+      }
+    }
+    await dispatch('getProductRelations');
   },
   async deleteProduct({dispatch}, id) {
     await axios.delete(`products/${id}`);
@@ -44,12 +62,12 @@ const actions = {
 const mutations = {
   optionsProducts(state, options) {
     state.productSchema = options;
-    if (!state.product) {
+    if (!state.productTemplate) {
       let product = {};
       for (let option of options) {
         product[option.key] = null;
       }
-      state.product = product;
+      state.productTemplate = product;
     }
   },
   setProducts(state, products) {
@@ -57,6 +75,10 @@ const mutations = {
     for (let product of products) {
       state.products[product.id] = product;
     }
+  },
+  setProductRelations(state, relations) {
+    state.productRelations = relations;
+
   },
   setProduct(state, product) {
     state.products[product.id] = product;

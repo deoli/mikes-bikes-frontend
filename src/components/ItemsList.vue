@@ -15,8 +15,8 @@
         </div>
         <template v-if="resourceType === 'blueprint'">
           <ul class="list-group list-group-flush">
-            <template v-for="product in productList" :key="product.id">
-              <router-link v-if="product.blueprint_id == item.id" :to="'/blueprint/' + item.id + '/product/' + product.id" class="list-group-item list-group-item-action">
+            <template v-for="product in productList[item.id]" :key="product.id">
+              <router-link :to="'/blueprint/' + item.id + '/product/' + product.id" class="list-group-item list-group-item-action">
                   {{ product.name }}
               </router-link>
             </template>
@@ -36,7 +36,14 @@
     props: ['resourceList', 'resourceType', 'parentFilter'],
     computed: {
       productList() {
-        return this.$store.getters.stateProducts || this.$store.dispatch('getProducts');
+        let products = {};
+        for (let relation of this.$store.getters.stateProductRelations) {
+          if (!products[relation.blueprint_id]) {
+            products[relation.blueprint_id] = [];
+          }
+          products[relation.blueprint_id].push(this.$store.getters.stateProduct(relation.product_id));
+        }
+        return products;
       }
     },
     methods: {

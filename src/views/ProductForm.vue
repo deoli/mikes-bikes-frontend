@@ -36,11 +36,22 @@
       },
       productValues() {
         if (this.$route.params.id) {
-          return this.$store.getters.stateProduct(this.$route.params.id);
+          let product = this.$store.getters.stateProduct(this.$route.params.id);
+          product.parent_ids = [];
+          product.blueprint_id = null;
+          for (let relation of this.$store.getters.stateProductRelations) {
+            if (relation.product_id == product.id) {
+              if (relation.parent_id) {
+                product.parent_ids.push(relation.parent_id);
+              }
+              product.blueprint_id = relation.blueprint_id;
+            }
+          }
+          return product;
         }
 
         let template = this.$store.getters.stateProductTemplate;
-        template.parent_id = this.$route.params.parent_id || null;
+        template.parent_ids = this.$route.params.parent_id? [this.$route.params.parent_id] : [];
         template.blueprint_id = this.$route.params.blueprint_id || null;
         return template;
       },

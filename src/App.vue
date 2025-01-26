@@ -16,6 +16,7 @@
     beforeCreate() {
       this.$store.dispatch('getBlueprints');
       this.$store.dispatch('getProducts');
+      this.$store.dispatch('getProductRelations');
       this.$store.dispatch('optionsBlueprints');
       this.$store.dispatch('optionsProducts');
     },

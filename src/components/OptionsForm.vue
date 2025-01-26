@@ -4,7 +4,7 @@
       <template v-if="resourceOption.type == 'string'">
         <div class="form-group mb-3">
           <label class="text-left">{{ resourceOption.key }}</label>
-          <input ref="inputs" type="text" class="form-control form-control-lg" v-model="localModel[resourceOption.key]" />
+          <input ref="inputs" type="text" required class="form-control form-control-lg" v-model="localModel[resourceOption.key]" />
         </div>
       </template>
       <template v-else-if="resourceOption.type == 'text'">
@@ -18,6 +18,14 @@
         <div class="form-check mb-3" v-show="localModel['parent_id']">
           <label class="text-left">{{ resourceOption.key }}</label>
           <input ref="inputs" type="checkbox" class="form-check-input" v-model="localModel[resourceOption.key]" />
+        </div>
+      </template>
+      <template v-else-if="resourceOption.type.startsWith('ref') && resourceOption.type.slice(4) === 'products'">
+        <div class="form-group mb-3" v-show="localModel['parent_id']">
+          <label class="text-left">{{ resourceOption.key }}</label>
+          <select ref="inputs" :required="localModel['parent_id'] && localModel['parent_id'].length" multiple class="form-control form-control-lg" v-model="localModel[resourceOption.key]">
+            <option v-for="item in getProductParentList()" :key="item.id" :value="item.id">{{ item.name }}</option>
+          </select>
         </div>
       </template>
       <template v-else-if="resourceOption.type.startsWith('ref')">
@@ -46,11 +54,27 @@
     methods: {
       getList(resource) {
         if (resource === 'blueprints') {
-          return this.$store.getters.stateBlueprints || this.$store.dispatch('getBlueprints');
+          return this.$store.getters.stateBlueprints;
         }
         if (resource === 'products') {
-          return this.$store.getters.stateProducts || this.$store.dispatch('getProducts');
+          return this.$store.getters.stateProducts;
         }
+      },
+      getProductParentList() {
+        let blueprintId = this.$route.params.blueprint_id || null;
+        let blueprint = this.$store.getters.stateBlueprint(blueprintId);
+        let products = [];
+        // eslint-disable-next-line no-empty-pattern
+        for (let [{}, product] of Object.entries(this.$store.getters.stateProducts)) {
+          if (product.blueprint_id == blueprint.parent_id) {
+            products.push(product);
+          }
+        }
+        // if (products.length === 0) {
+        //   let parent_id = this.$route.params.parent_id || null;
+        //   products.push(this.$store.getters.stateProduct(parent_id));
+        // }
+        return products;
       },
       saveItem() {
         this.$emit('save-form', this.localModel);
