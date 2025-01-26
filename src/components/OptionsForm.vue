@@ -4,8 +4,8 @@
       <template v-if="resourceOption.type === 'string'">
         <div class="form-group mb-3">
           <label class="text-left">{{ resourceOption.key }}</label>
-          <template v-if="resourceOption.key === 'name'">
-            <v-select label="name" :options="resourceList" taggable :value="localModel[resourceOption.key]" @input="setName"></v-select>
+          <template v-if="resourceOption.key === 'name' && resourceType === 'products' && !localModel['id'] && localModel['parent_id'].length">
+            <v-select label="name" :options="resourceList" taggable pushTags :value="localModel[resourceOption.key]" @option:selected="setId"></v-select>
           </template>
           <template v-else>
             <input ref="inputs" type="text" required class="form-control form-control-lg" v-model="localModel[resourceOption.key]" />
@@ -113,8 +113,9 @@
         // }
         return products;
       },
-      setName(event) {
-          this.localModel['name'] = event.target.value;
+      setId(option) {
+        this.localModel['name'] = option.name;
+        this.localModel['id'] = option.id || undefined;
       },
       saveItem() {
         this.$emit('save-form', this.localModel);
