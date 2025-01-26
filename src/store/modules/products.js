@@ -43,7 +43,7 @@ const actions = {
     if (product.blueprint_id) {
       let relation = {'blueprint_id': product.blueprint_id, 'product_id': product.id};
       if (product.parent_id && product.parent_id.length) {
-        for (let parent_id in product.parent_id) {
+        for (let parent_id of product.parent_id) {
           relation.parent_id = parent_id;
           await axios.post('blueprint_products', relation);
         }
