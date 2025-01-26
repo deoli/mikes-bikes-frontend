@@ -14,14 +14,20 @@
           </textarea>
         </div>
       </template>
+      <template v-if="resourceOption.type == 'integer'">
+        <div class="form-group mb-3"> <!-- should be hidden unless related blueprint is a leaf -->
+          <label class="text-left">{{ resourceOption.key }}</label>
+          <input ref="inputs" type="number" class="form-control form-control-lg" v-model="localModel[resourceOption.key]" />
+        </div>
+      </template>
       <template v-else-if="resourceOption.type == 'boolean'">
-        <div class="form-check mb-3" v-show="localModel['parent_id']">
+        <div class="form-check mb-3" v-show="localModel['parent_id'] && localModel['parent_id'].length">
           <label class="text-left">{{ resourceOption.key }}</label>
           <input ref="inputs" type="checkbox" class="form-check-input" v-model="localModel[resourceOption.key]" />
         </div>
       </template>
       <template v-else-if="resourceOption.type.startsWith('ref') && resourceOption.type.slice(4) === 'products'">
-        <div class="form-group mb-3" v-show="localModel['parent_id']">
+        <div class="form-group mb-3" v-show="localModel['parent_id'] && localModel['parent_id'].length">
           <label class="text-left">{{ resourceOption.key }}</label>
           <select ref="inputs" :required="localModel['parent_id'] && localModel['parent_id'].length" multiple class="form-control form-control-lg" v-model="localModel[resourceOption.key]">
             <option v-for="item in getProductParentList()" :key="item.id" :value="item.id">{{ item.name }}</option>
@@ -29,7 +35,7 @@
         </div>
       </template>
       <template v-else-if="resourceOption.type.startsWith('ref')">
-        <div class="form-group mb-3" v-show="localModel['parent_id']">
+        <div class="form-group mb-3" v-show="localModel['parent_id'] && localModel['parent_id'].length">
           <label class="text-left">{{ resourceOption.key }}</label>
           <select ref="inputs" class="form-control form-control-lg" disabled v-model="localModel[resourceOption.key]">
             <option v-for="item in getList(resourceOption.type.slice(4))" :key="item.id" :value="item.id">{{ item.name }}</option>

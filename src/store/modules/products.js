@@ -42,8 +42,8 @@ const actions = {
     }
     if (product.blueprint_id) {
       let relation = {'blueprint_id': product.blueprint_id, 'product_id': product.id};
-      if (product.parent_ids && product.parent_ids.length) {
-        for (let parent_id in product.parent_ids) {
+      if (product.parent_id && product.parent_id.length) {
+        for (let parent_id in product.parent_id) {
           relation.parent_id = parent_id;
           await axios.post('blueprint_products', relation);
         }
@@ -61,6 +61,8 @@ const actions = {
 
 const mutations = {
   optionsProducts(state, options) {
+    options.push({key: 'parent_id', type: 'ref#products'});
+    options.push({key: 'blueprint_id', type: 'ref#blueprints'});
     state.productSchema = options;
     if (!state.productTemplate) {
       let product = {};
