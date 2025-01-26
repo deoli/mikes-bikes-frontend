@@ -4,7 +4,7 @@
       <div class="col">
         <h1>Product form</h1>
         <OptionsForm 
-          :resource-options="productOptions" 
+          :resource-type="'product'" 
           :resource-values="productValues"
           @save-form="saveForm"
           @cancel-form="cancelForm"
@@ -31,9 +31,6 @@
       TreeView,
     },
     computed: {
-      productOptions() {
-        return this.$store.getters.stateProductSchema;
-      },
       productValues() {
         if (this.$route.params.id) {
           let product = this.$store.getters.stateProduct(this.$route.params.id);

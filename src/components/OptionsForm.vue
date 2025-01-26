@@ -1,26 +1,26 @@
 <template>
   <form v-on:submit.prevent="saveItem">
     <template v-for="resourceOption in resourceOptions" :key="resourceOption.key">
-      <template v-if="resourceOption.type == 'string'">
+      <template v-if="resourceOption.type === 'string'">
         <div class="form-group mb-3">
           <label class="text-left">{{ resourceOption.key }}</label>
           <input ref="inputs" type="text" required class="form-control form-control-lg" v-model="localModel[resourceOption.key]" />
         </div>
       </template>
-      <template v-else-if="resourceOption.type == 'text'">
+      <template v-else-if="resourceOption.type === 'text'">
         <div class="form-group mb-3">
           <label class="text-left">{{ resourceOption.key }}</label>
           <textarea ref="inputs" class="form-control form-control-lg" v-model="localModel[resourceOption.key]">
           </textarea>
         </div>
       </template>
-      <template v-if="resourceOption.type == 'integer'">
+      <template v-if="resourceOption.type === 'integer'">
         <div class="form-group mb-3"> <!-- should be hidden unless related blueprint is a leaf -->
           <label class="text-left">{{ resourceOption.key }}</label>
           <input ref="inputs" type="number" class="form-control form-control-lg" v-model="localModel[resourceOption.key]" />
         </div>
       </template>
-      <template v-else-if="resourceOption.type == 'boolean'">
+      <template v-else-if="resourceOption.type === 'boolean'">
         <div class="form-check mb-3" v-show="localModel['parent_id'] && localModel['parent_id'].length">
           <label class="text-left">{{ resourceOption.key }}</label>
           <input ref="inputs" type="checkbox" class="form-check-input" v-model="localModel[resourceOption.key]" />
@@ -51,8 +51,17 @@
 <script>
   export default {
     name: 'OptionsForm',
-    props: ['resourceOptions', 'resourceValues'],
+    props: ['resourceType', 'resourceValues'],
     computed: {
+      resourceOptions() {
+        if (this.resourceType === 'blueprint') {
+          return this.$store.getters.stateBlueprintSchema;
+        }
+        if (this.resourceType === 'product') {
+          return this.$store.getters.stateProductSchema;
+        }
+        return null;
+      },
       localModel() {
         return Object.assign({}, this.resourceValues);
       },

@@ -4,7 +4,7 @@
       <div class="col">
         <h1>Product blueprint form</h1>
         <OptionsForm 
-          :resource-options="blueprintOptions" 
+          :resource-type="'blueprint'" 
           :resource-values="blueprintValues"
           @save-form="saveForm"
           @cancel-form="cancelForm"
@@ -32,9 +32,6 @@
       TreeView
     },
     computed: {
-      blueprintOptions() {
-        return this.$store.getters.stateBlueprintSchema;
-      },
       blueprintValues() {
         if (this.$route.params.id) {
           return this.$store.getters.stateBlueprint(this.$route.params.id);
