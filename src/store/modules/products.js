@@ -113,8 +113,31 @@ const mutations = {
       }
       return ancestorIds;
     }
+    
+    // eslint-disable-next-line no-empty-pattern
+    for (let [{}, product] of Object.entries(state.products)) {
+      product.descendant_id = getDescendantIds(product.id);
+      state.products[product.id] = product;
+    }
+    
+    function getDescendantIds(productId) {
+      let descendantIds = [];
+      // eslint-disable-next-line no-empty-pattern
+      for (let [{}, child] of Object.entries(state.products)) {
+        if (child.parent_id.includes(productId)) {
+          descendantIds.push(child.id);
+        }
+      }
+      for (let descendantId of descendantIds) {
+        descendantIds = descendantIds.concat(getDescendantIds(descendantId));
+      }
+      return descendantIds;
+    }
   },
   setProduct(state, product) {
+    if (!product.descendant_id) {
+      product.descendant_id = [];
+    }
     if (!product.ancestor_id) {
       product.ancestor_id = [];
     }

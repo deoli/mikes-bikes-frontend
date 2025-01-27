@@ -12,6 +12,9 @@
               <router-link class="nav-link" to="/blueprints">Admin</router-link>
             </li>
             <li class="nav-item">
+              <router-link class="nav-link" to="/inventory">Inventory</router-link>
+            </li>
+            <li class="nav-item">
               <router-link class="nav-link" to="/products">Shop</router-link>
             </li>
           </ul>
