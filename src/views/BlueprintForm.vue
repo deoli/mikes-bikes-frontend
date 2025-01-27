@@ -51,13 +51,10 @@
     methods: {
       saveForm(data) {
         this.$store.dispatch('saveBlueprint', data);
+        this.cancelForm();
       },
       cancelForm() {
-        if (this.blueprintValues.parent_id) {
-          this.$router.push({path: '/blueprint/' + this.blueprintValues.parent_id});
-        } else {
-          this.$router.push({path: '/blueprints'});
-        }
+        this.$router.push(this.$router.options.history.state.back);
       },
       addChild() {
         this.$router.push({path: '/blueprint/' + this.$route.params.id + '/new'});

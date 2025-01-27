@@ -51,9 +51,10 @@
     methods: {
       saveForm(data) {
         this.$store.dispatch('saveProduct', data);
+        this.cancelForm();
       },
       cancelForm() {
-        this.$router.push({path: '/products'});
+        this.$router.push(this.$router.options.history.state.back);
       },
       addChild() {
         this.$router.push({path: '/product/' + this.$route.params.id + '/new'});

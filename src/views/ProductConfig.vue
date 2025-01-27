@@ -6,6 +6,7 @@
       </ul>
       <button class="btn btn-primary m-1" type="submit">Add to cart</button>  
     </div>
+    <button class="btn btn-secondary m-1" @click.prevent="cancelForm">Cancel</button>
   </form>
 </template>
 
@@ -35,7 +36,7 @@
         this.$store.dispatch('addToCart', order);
       },
       cancelForm() {
-        this.$emit('cancel-form');
+        this.$router.push(this.$router.options.history.state.back);
       }
     },
   };
