@@ -27,7 +27,7 @@
         </div>
       </template>
       <template v-if="resourceOption.type === 'integer'">
-        <div class="form-group mb-3"> <!-- should be hidden unless related blueprint is a leaf -->
+        <div class="form-group mb-3">
           <label class="text-left">{{ resourceOption.key }}</label>
           <input ref="inputs" type="number" class="form-control form-control-lg" v-model="localModel[resourceOption.key]" />
         </div>

@@ -7,9 +7,10 @@
           <h5 class="card-title" v-if="item.parent_product">{{ item.parent_product.name }} [{{ item.product.name }}]</h5>
           <h5 class="card-title" v-else>{{ item.product.name }}</h5>
           <p class="card-text" style="font-size: .9rem;">The item's description would go here if we had one.</p>
-          <router-link :to="'/' + resourceType + '/' + item.id" class="btn btn-primary m-1">
-            Configure
-          </router-link>
+          <div class="form-group mb-3">
+            <label class="text-left">Stock</label>
+            <input type="number" class="form-control form-control-lg" placeholder="0" v-model="item.stock_count" :data-unique_key="item.unique_key" @change="stockChange" />
+          </div>
         </div>
       </div>
     </template>
@@ -20,5 +21,19 @@
   export default {
     name: 'PartsList',
     props: ['resourceList', 'resourceType', 'parentFilter'],
+    methods: {
+      stockChange(event) {
+        let stock_count = event.target.value;
+        let [product_id, parent_id] = event.target.dataset.unique_key.split('-');
+        let relations = this.$store.getters.stateProductRelations.filter(relation => relation.product_id == product_id);
+        if (parent_id) {
+          relations = relations.filter(relation => relation.parent_id == parent_id);
+        }
+        for (let relation of relations) {
+          relation.stock_count = stock_count;
+        }
+        this.$store.dispatch('saveProductRelations', relations);
+      }
+    },
   };
 </script>

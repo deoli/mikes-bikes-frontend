@@ -58,6 +58,12 @@ const actions = {
     await axios.delete(`products/${id}`);
     await dispatch('getProducts');
   },
+  async saveProductRelations({dispatch}, relations) {
+    for (let relation of relations) {
+      await axios.patch(`blueprint_products/${relation.id}`, relation);
+    }
+    await dispatch('getProductRelations');
+  },
 };
 
 const mutations = {
