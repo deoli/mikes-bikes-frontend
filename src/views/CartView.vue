@@ -1,20 +1,20 @@
 <template>
   <div class="cart">
     <h1>This is your cart</h1>
-    <ul>
+    <div>
       <template v-for="order in cartOrders" :key="order.id">
-        <li>{{ order.id }} : {{ order.items.join('-') }}</li>
+        <OrderItem :order="order" />
       </template>
-    </ul>
+    </div>
   </div>
 </template>
 
 <script>
-  // import HelloWorld from '@/components/HelloWorld.vue';
+  import OrderItem from '@/components/OrderItem.vue';
   export default {
     name: 'CartView',
     components: {
-      // HelloWorld
+      OrderItem
     },
     computed: {
       cartOrders() {
