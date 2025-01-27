@@ -44,14 +44,17 @@
         }
       },
       checkSelectable(product) {
+        let selectedParent = this.$store.getters.stateConfigurator['select-' + this.blueprint.parent_id];
         let inStock = true;
         if (!product.descendant_id.length) {
           let relations = this.$store.getters.stateProductRelations.filter(relation => relation.product_id == product.id && relation.blueprint_id == this.blueprint.id);
-          if (!relations[0].stock_count) {
+          if (selectedParent) {
+            relations = relations.filter(relation => relation.parent_id == selectedParent.id);
+          }
+          if (!relations.length || !relations[0].stock_count) {
             inStock = false;
           }
         }
-        let selectedParent = this.$store.getters.stateConfigurator['select-' + this.blueprint.parent_id];
         if (selectedParent && product.parent_id.includes(selectedParent.id) && inStock) {
           return true;
         }
