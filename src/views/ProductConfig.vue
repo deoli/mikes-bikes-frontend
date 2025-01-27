@@ -24,16 +24,13 @@
       }
     },
     methods: {
-      addToCart(event) {
+      addToCart() {
         let order = {};
         order.id = crypto.randomUUID();
         order.items = [];
-        const formData = new FormData(event.target);
         // eslint-disable-next-line no-empty-pattern
-        for (let [{}, value] of formData) {
-          if (value) {
-            order.items.push(value);
-          }
+        for (let [{}, product] of Object.entries(this.$store.getters.stateConfigurator)) {
+          order.items.push(product);
         }
         this.$store.dispatch('addToCart', order);
       },
