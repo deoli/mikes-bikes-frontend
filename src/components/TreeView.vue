@@ -31,6 +31,11 @@
         return parentNode;
       }
     },
+    mounted() {
+      if (this.nodeAction === 'configurator') {
+        this.$store.getters.stateConfigurator['select-' + this.rootId] = this.$store.getters.stateProduct(this.$route.params.id);
+      }
+    }
   };
 </script>
   

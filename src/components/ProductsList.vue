@@ -1,7 +1,7 @@
 <template>
   <div class="row products-list-vue">
     <template v-for="item in resourceList" :key="item.id">
-      <div v-show="item.parent_id == parentFilter" class="card col-sm m-3" style="min-width: 16rem; max-width: 16rem;">
+      <div v-show="(parentFilter && item.parent_id.includes(parentFilter)) || (!parentFilter && !item.parent_id.length)" class="card col-sm m-3" style="min-width: 16rem; max-width: 16rem;">
         <img class="card-img-top" src="../assets/logo.png" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">{{ item.name }}</h5>
