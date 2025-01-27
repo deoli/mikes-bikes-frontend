@@ -2,7 +2,7 @@
   <div class="row items-list-vue">
     <template v-for="item in resourceList" :key="item.id">
       <div v-show="item.parent_id == parentFilter" class="card col-sm m-3" style="min-width: 16rem; max-width: 16rem;">
-        <img class="card-img-top" src="../assets/logo.png" alt="Card image cap">
+        <img class="card-img-top" src="../assets/logo.png" alt="Product blueprint image">
         <div class="card-body">
           <h5 class="card-title">{{ item.name }}</h5>
           <p class="card-text" style="font-size: .9rem;">The item's description would go here if we had one.</p>
@@ -32,7 +32,7 @@
 
 <script>
   export default {
-    name: 'ItemsList',
+    name: 'BlueprintList',
     props: ['resourceList', 'resourceType', 'parentFilter'],
     computed: {
       productList() {

@@ -10,7 +10,7 @@ const routes = [
   {
     path: '/blueprints',
     name: 'blueprints',
-    component: () => import('@/views/BlueprintList.vue')
+    component: () => import('@/views/BlueprintView.vue')
   },
   {
     path: '/blueprint/new',
@@ -39,7 +39,7 @@ const routes = [
   {
     path: '/products',
     name: 'products',
-    component: () => import('@/views/ProductList.vue')
+    component: () => import('@/views/ProductView.vue')
   },
   {
     path: '/product/:id',

@@ -1,7 +1,7 @@
 <template>
   <div class="part">
     <h1>This is your inventory of parts</h1>
-    <PartsList
+    <PartList
       :resource-list="inventoryList"
       :resource-type="'inventory'"
     />
@@ -9,11 +9,11 @@
 </template>
 
 <script>
-  import PartsList from '@/components/PartsList.vue';
+  import PartList from '@/components/PartList.vue';
   export default {
     name: 'InventoryView',
     components: {
-      PartsList
+      PartList
     },
     computed: {
       inventoryList() {

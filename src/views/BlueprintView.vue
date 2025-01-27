@@ -1,7 +1,7 @@
 <template>
   <div class="blueprint">
     <h1>Product blueprints</h1>
-    <ItemsList
+    <BlueprintList
       :resource-list="blueprintList"
       :resource-type="'blueprint'"
       :parent-filter="null"
@@ -11,11 +11,11 @@
 </template>
 
 <script>
-  import ItemsList from '@/components/ItemsList.vue';
+  import BlueprintList from '@/components/BlueprintList.vue';
   export default {
-    name: 'BlueprintList',
+    name: 'BlueprintView',
     components: {
-      ItemsList
+      BlueprintList
     },
     computed: {
       blueprintList() {

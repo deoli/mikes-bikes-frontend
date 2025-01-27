@@ -1,7 +1,7 @@
 <template>
   <div class="product">
     <h1>These are our products</h1>
-    <ProductsList
+    <ProductList
       :resource-list="productList"
       :resource-type="'product'"
       :parent-filter="null"
@@ -10,11 +10,11 @@
 </template>
 
 <script>
-  import ProductsList from '@/components/ProductsList.vue';
+  import ProductList from '@/components/ProductList.vue';
   export default {
-    name: 'ProductList',
+    name: 'ProductView',
     components: {
-      ProductsList
+      ProductList
     },
     computed: {
       productList() {

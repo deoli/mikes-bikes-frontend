@@ -2,7 +2,7 @@
   <div class="row parts-list-vue">
     <template v-for="item in resourceList" :key="item.id">
       <div class="card col-sm m-3" style="min-width: 16rem; max-width: 16rem;">
-        <img class="card-img-top" src="../assets/logo.png" alt="Card image cap">
+        <img class="card-img-top" src="../assets/logo.png" alt="Part image">
         <div class="card-body">
           <h5 class="card-title" v-if="item.parent_product">{{ item.parent_product.name }} [{{ item.product.name }}]</h5>
           <h5 class="card-title" v-else>{{ item.product.name }}</h5>
@@ -19,7 +19,7 @@
 
 <script>
   export default {
-    name: 'PartsList',
+    name: 'PartList',
     props: ['resourceList', 'resourceType', 'parentFilter'],
     methods: {
       stockChange(event) {
