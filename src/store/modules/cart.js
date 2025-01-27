@@ -16,7 +16,6 @@ const actions = {
   async removeFromCart({commit}, order) {
     // await axios.patch('removeFromCart', order);
     commit('removeFromCart', order);
-
   },
 };
 

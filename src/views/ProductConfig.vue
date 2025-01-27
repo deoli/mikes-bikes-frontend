@@ -39,5 +39,10 @@
         this.$router.push(this.$router.options.history.state.back);
       }
     },
+    mounted() {
+      let configurator = {};
+      configurator['select-' + this.getBlueprintId] = this.$store.getters.stateProduct(this.$route.params.id);
+      this.$store.commit('setConfigurator', configurator);
+    },
   };
 </script>

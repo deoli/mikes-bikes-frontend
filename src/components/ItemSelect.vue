@@ -58,7 +58,9 @@
         return false;
       },
       productSelected(product) {
-        this.$store.getters.stateConfigurator['select-' + this.blueprint.id] = product;
+        let configurator = {};
+        configurator['select-' + this.blueprint.id] = product;
+        this.$store.commit('addConfigurator', configurator);
       },
     },
   };
