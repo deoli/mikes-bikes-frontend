@@ -21,18 +21,22 @@
       }
     },
     methods: {
-      getLeafProducts() {console.log(this.$store.getters.stateProductRelations);
-        let relations = [];
+      getLeafProducts() {
+        let relations = {};
         // eslint-disable-next-line no-empty-pattern
         for (let relation of this.$store.getters.stateProductRelations) {
           let product = this.$store.getters.stateProducts[relation.product_id];
-          let blueprint = this.$store.getters.stateBlueprints[relation.blueprint_id];
           if (product.descendant_id.length === 0) {
             relation.product = product;
+            let unique_key = relation.product_id;
+
+            let blueprint = this.$store.getters.stateBlueprints[relation.blueprint_id];
             if (blueprint.is_attribute) {
-              relation.parent_product = this.$store.getters.stateProducts[relation.parent_id];console.log(relation);
+              relation.parent_product = this.$store.getters.stateProducts[relation.parent_id];
+              unique_key += '-' + relation.parent_id;
             }
-            relations.push(relation);
+            relation.unique_key = unique_key;
+            relations[unique_key] = relation;
           }
         }
         return relations;
