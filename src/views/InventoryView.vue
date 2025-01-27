@@ -2,9 +2,8 @@
   <div class="part">
     <h1>This is your inventory of parts</h1>
     <PartsList
-      :resource-list="partList"
-      :resource-type="'part'"
-      :parent-filter="null"
+      :resource-list="inventoryList"
+      :resource-type="'inventory'"
     />
   </div>
 </template>
@@ -17,20 +16,26 @@
       PartsList
     },
     computed: {
-      partList() {
+      inventoryList() {
         return this.getLeafProducts();
       }
     },
     methods: {
-      getLeafProducts() {
-        let products = [];
+      getLeafProducts() {console.log(this.$store.getters.stateProductRelations);
+        let relations = [];
         // eslint-disable-next-line no-empty-pattern
-        for (let [{}, product] of Object.entries(this.$store.getters.stateProducts)) {
+        for (let relation of this.$store.getters.stateProductRelations) {
+          let product = this.$store.getters.stateProducts[relation.product_id];
+          let blueprint = this.$store.getters.stateBlueprints[relation.blueprint_id];
           if (product.descendant_id.length === 0) {
-            products.push(product);
+            relation.product = product;
+            if (blueprint.is_attribute) {
+              relation.parent_product = this.$store.getters.stateProducts[relation.parent_id];console.log(relation);
+            }
+            relations.push(relation);
           }
         }
-        return products;
+        return relations;
       },
     },
   };

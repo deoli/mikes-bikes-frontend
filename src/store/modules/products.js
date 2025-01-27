@@ -3,7 +3,8 @@ import axios from 'axios';
 const state = {
   productSchema: null,
   products: null,
-  product: null
+  productTemplate: null,
+  productRelations: null,
 };
 
 const getters = {

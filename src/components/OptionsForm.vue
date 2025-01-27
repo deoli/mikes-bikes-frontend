@@ -33,7 +33,7 @@
         </div>
       </template>
       <template v-else-if="resourceOption.type === 'boolean'">
-        <div class="form-check mb-3" v-show="localModel['parent_id'] && localModel['parent_id'].length">
+        <div class="form-check mb-3" v-show="localModel['parent_id']">
           <label class="text-left">{{ resourceOption.key }}</label>
           <input ref="inputs" type="checkbox" class="form-check-input" v-model="localModel[resourceOption.key]" />
         </div>
